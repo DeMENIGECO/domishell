@@ -1,5 +1,7 @@
 # DomiShell
 
+---
+
 ## Basi
 
 Installate DomiShell e digitate il comando
@@ -16,6 +18,7 @@ Dovrebbe stampare la scitta `Hello World!`.
 https://github.com/user-attachments/assets/0c6ec9a8-58a5-4e12-8287-c10ec87a9d6d
 
 
+---
 
 
 ## DomiShell Admin
@@ -33,6 +36,9 @@ admincmd
 ```
 
 Deve stampare `Questo è un comando riservato agli admin!`
+
+---
+
 
 ## Download
 
