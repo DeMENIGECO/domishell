@@ -33,3 +33,10 @@ admincmd
 ```
 
 Deve stampare `Questo è un comando riservato agli admin!`
+
+## Download
+
+- [Download Ultima versione](https://github.com/DeMENIGECO/domishell/releases/download/1.0.0/installer.exe)
+
+>[!TIP]
+>Per scaricare `installer.exe` delle altre versioni, vai alle [Releases](https://github.com/DeMENIGECO/domishell/releases/)
