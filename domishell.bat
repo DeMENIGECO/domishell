@@ -1,4 +1,6 @@
 @echo off
+setlocal EnableDelayedExpansion
+
 title DomiShell - Terminale Personalizzato
 color 0A
 
@@ -15,7 +17,7 @@ cls
 echo =====================================
 echo         DomiShell Terminale
 echo =====================================
-echo Versione 1.0.0
+echo Versione 1.0.1
 if "%isAdmin%"=="true" (
     echo Modalita': Amministratore
 ) else (
@@ -97,7 +99,7 @@ echo -----------------------------------------------------
 echo                     DOMI PPTP
 echo -----------------------------------------------------
 
-echo Versione 1.0.0
+echo Versione 1.0.1
 powershell -command "Write-Host 'La macchina Win11/Microsoft puo'' subire danni se Domi PPTP non e'' usato con cautela' -ForegroundColor Cyan"
 
 :: Richiesta input
@@ -111,15 +113,26 @@ if /I "%choice%"=="S" (
     echo            avvio programma di ricezione...
     timeout /t 2 /nobreak >nul
     powershell -command "Write-Host 'Domi PPTP e'' stato avviato con successo.' -ForegroundColor Green"
-    set /p "let=Digita il nome, la directory o il programma da trattare in Domi PPTP: "
+    set /p "let=Digita il nome, la directory o il programma datrattare in Domi PPTP: "
+
+    if "!let!"=="" (
+        echo ERRORE: input vuoto!
+        pause
+        goto menu
+    )
+
+    set "INPUT_RAW=!let!"
+
+    mkdir !let!\.domipptp 2>nul
+    powershell -command "$expanded = [Environment]::ExpandEnvironmentVariables($env:INPUT_RAW); $dest = Join-Path $expanded '.domipptp'; New-Item -ItemType Directory -Force -Path $dest | Out-Null; Expand-Archive -Path 'i4SHA\pptp_res.zip' -DestinationPath $dest -Force; Write-Host 'DEST = ' $dest"
     echo Trattato in Domi PPTP.
+    pause
+    goto menu
 ) else (
-    powershell -command "Write-Host 'Avvio annullato dall''utente.' -ForegroundColor Red"
+    powershell -command "Write-Host 'Avvio annullato dall''utente.' -ForegroundColor Red" 
+    pause
+    goto menu
 )
-
-
-pause
-goto menu
 
 :domishell_studio_mode
 cls
@@ -145,7 +158,7 @@ goto domishell_studio_mode
 
 :studiocmd_status
 echo Ecco le informazioni su DomiShell:
-echo Versione: 1.0.0
+echo Versione: 1.0.1
 echo Autore: DomeniGeco
 pause
 goto domishell_studio_mode
@@ -157,7 +170,7 @@ echo        TEST MODULO DOMI PPTP
 echo =====================================
 
 set "testdir=%LOCALAPPDATA%\dgeco_apps\domishell\studio\domipptp\test_env"
-set "zipfile=studio_TESTCOM.zip"
+set "zipfile=i4SHA/studio_TESTCOM.zip"
 
 echo Creazione cartella di test: %testdir%
 mkdir "%testdir%" 2>nul
